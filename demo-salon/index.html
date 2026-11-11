@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Atelier Lumière — Bruxelles</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23f2d3c7'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%231f1c1b'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300..600&display=swap">
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="styles.css">
+  <!-- All business content lives in config.js -->
+  <script src="config.js"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Aller au contenu</a>
+
+  <header class="bar" id="bar">
+    <div class="bar__inner">
+      <a class="bar__name" href="#top"><span class="bar__mark" aria-hidden="true"></span><span data-bind="business.name"></span></a>
+      <nav class="bar__nav" id="barNav" aria-label="Navigation">
+        <a href="#soins" data-t="ui.nav.services"></a>
+        <a href="#atelier" data-t="ui.nav.gallery"></a>
+        <a href="#equipe" data-t="ui.nav.team"></a>
+        <a href="#infos" data-t="ui.nav.contact"></a>
+        <a class="pill pill--accent bar__navbook js-book" href="#" target="_blank" rel="noopener"><span data-t="ui.book"></span><span class="count" data-count hidden></span></a>
+      </nav>
+      <div class="bar__end">
+        <button class="lang" type="button" id="langToggle">EN</button>
+        <a class="pill pill--accent pill--small bar__book js-book" href="#" target="_blank" rel="noopener"><span data-t="ui.bookShort"></span><span class="count" data-count hidden></span></a>
+        <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="barNav"><span class="menu-btn__icon" aria-hidden="true"></span><span class="sr" id="menuLabel">Menu</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: one photograph across the whole screen, the name set on it -->
+    <section class="hero" id="top">
+      <div class="hero__media" id="heroMedia" aria-hidden="true"></div>
+      <div class="hero__text">
+        <h1 class="hero__name" data-bind="business.name"></h1>
+        <div class="hero__row">
+          <p class="hero__lead" data-t="business.tagline"></p>
+          <div class="hero__actions">
+            <a class="pill pill--accent js-book" href="#" target="_blank" rel="noopener" data-t="ui.book"></a>
+            <a class="hero__link" href="#soins" data-t="hero.ctaServices"></a>
+          </div>
+        </div>
+        <p class="hero__note"><span id="heroToday"></span> · <span data-t="hero.badge"></span></p>
+      </div>
+    </section>
+
+    <!-- SERVICES: cards in a horizontal row; tap a treatment to add it -->
+    <section class="services" id="soins" aria-labelledby="soinsTitle">
+      <div class="frame services__head">
+        <h2 id="soinsTitle" data-t="services.title"></h2>
+        <div class="services__side">
+          <p data-t="services.intro"></p>
+          <div class="scroller-btns">
+            <button class="round" type="button" id="prevCard"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="round" type="button" id="nextCard"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <ul class="cards" id="cards" tabindex="0"></ul>
+      <div class="frame">
+        <div class="pickbar" id="pickbar" aria-live="polite">
+          <p class="pickbar__text" id="pickbarText"></p>
+          <a class="pill pill--ink js-book" href="#" target="_blank" rel="noopener" data-t="booking.button"></a>
+        </div>
+        <p class="note" data-t="services.note"></p>
+      </div>
+    </section>
+
+    <!-- GALLERY: photographs gathered round a heading -->
+    <section class="atelier" id="atelier" aria-labelledby="atelierTitle">
+      <div class="frame mosaic" id="mosaic">
+        <div class="mosaic__head">
+          <h2 id="atelierTitle" data-t="gallery.title"></h2>
+          <p data-t="gallery.text"></p>
+          <a class="text-link" href="#equipe"><span data-t="ui.nav.team"></span> <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM: round portraits in a row -->
+    <section class="team" id="equipe" aria-labelledby="teamTitle">
+      <div class="frame team__head">
+        <h2 id="teamTitle" data-t="team.title"></h2>
+        <p class="muted" data-t="team.disclaimer"></p>
+      </div>
+      <ul class="people" id="people"></ul>
+    </section>
+
+    <!-- BOOKING: a reply card on a blush band -->
+    <section class="booking" id="rendez-vous" aria-labelledby="bookTitle">
+      <div class="frame booking__grid">
+        <div class="booking__side">
+          <p class="booking__text" data-t="booking.text"></p>
+          <ol class="reply-steps" id="steps"></ol>
+        </div>
+        <div class="card-reply">
+          <h2 id="bookTitle" data-t="booking.title"></h2>
+          <div class="picked">
+            <p class="picked__title" data-t="ui.picked"></p>
+            <ul class="picked__list" id="pickedList"></ul>
+            <p class="picked__total" id="pickedTotal"></p>
+            <button class="text-btn" type="button" id="clearPicks" data-t="ui.clear"></button>
+          </div>
+          <a class="pill pill--ink pill--wide js-book" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span data-t="booking.button"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOURS + CONTACT: one visit card on a full-width photograph -->
+    <section class="visit" id="infos" aria-labelledby="visitTitle">
+      <div class="visit__photo" id="visitPhoto"></div>
+      <div class="frame visit__frame">
+        <div class="visit__card">
+          <h2 id="visitTitle" data-t="contactSection.title"></h2>
+          <p class="visit__address"><span data-bind="contact.address"></span><br><a class="text-link" id="mapLink" href="#" target="_blank" rel="noopener"><span data-t="contactSection.mapButton"></span> <span aria-hidden="true">↗</span></a></p>
+          <h3 class="visit__sub" id="hours" data-t="hours.title"></h3>
+          <ul class="visit__hours" id="hoursList"></ul>
+          <p class="visit__access" data-t="hours.access"></p>
+          <p class="visit__contact">
+            <a id="phoneLink" href="#"></a><br>
+            <a id="emailLink" href="#"></a>
+          </p>
+          <a class="pill pill--accent pill--wide js-book" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span data-t="booking.button"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="frame">
+      <p class="footer__line" data-t="hero.title"></p>
+      <p class="footer__name" data-bind="business.name" aria-hidden="true"></p>
+      <div class="footer__small">
+        <p><span data-t="business.demoNotice"></span> <span data-t="ui.photoCredits"></span></p>
+        <p>© <span id="year"></span> <span data-bind="business.name"></span> · <span data-t="ui.rights"></span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating booking button (phones only) -->
+  <a class="fab pill pill--accent js-book" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-wa"/></svg>
+    <span data-t="ui.bookShort"></span><span class="count" data-count hidden></span>
+  </a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.34A9.92 9.92 0 1 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.03.8.81-2.95-.2-.31a8.22 8.22 0 1 1 6.9 3.79Zm4.5-6.15c-.25-.12-1.46-.72-1.69-.8-.23-.09-.39-.13-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.54.06a6.73 6.73 0 0 1-3.36-2.94c-.25-.44.25-.41.72-1.36.08-.16.04-.3-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.79 2.79 0 0 0-.87 2.07 4.84 4.84 0 0 0 1.01 2.57 11.08 11.08 0 0 0 4.24 3.75c1.58.68 2.2.74 2.99.62.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.17-.47-.29Z"/></symbol>
+  </svg>
+</body>
+</html>
